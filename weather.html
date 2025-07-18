@@ -76,12 +76,15 @@
         const response = await fetch(url);
         if (!response.ok) throw new Error('City not found');
         const data = await response.json();
+        const windSpeedKmh = (data.wind.speed * 3.6 / 1.609).toFixed(1);
+        const country = data.sys.country;
         console.log("stephanie this is the weather", data)
 
-        const windSpeedKmh = (data.wind.speed * 3.6 / 1.609).toFixed(1);
 
         document.getElementById('weatherResult').innerHTML = `
-          <h2>${data.name}, ${data.sys.country}</h2>
+          <h2>${data.name}, ${data.sys.country}
+            <img src="https://flagsapi.com/${country}/flat/32.png" alt="${country} flag" />
+         </h2>
           <p>${data.weather[0].main} - ${data.weather[0].description}</p>
           <p>Temp: ${data.main.temp}°C</p>
           <p>Feels Like: ${data.main.feels_like}°C</p>
