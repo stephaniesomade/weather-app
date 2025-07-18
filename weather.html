@@ -6,6 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather App</title>
   <style>
+    .search-row {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .search-row input {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.75rem;
+      width: 60%;
+      min-width: 160px;
+    }
+
     body {
       font-family: 'Helvetica Neue', sans-serif;
       background: linear-gradient(to right, #8EC5FC, #E0C3FC);
@@ -63,7 +80,7 @@
 </head>
 
 <body>
-  <div class="card">
+  <div class="card search-row">
     <h1>Find out the Weather Today</h1>
     <input type="text" id="cityInput" placeholder="Enter city name" />
     <button onclick="getWeather()">Get Weather</button>
