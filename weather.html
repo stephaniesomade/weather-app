@@ -68,7 +68,7 @@
         console.log("stephanie this is the weather", data)
 
         document.getElementById('weatherResult').innerHTML = `
-          <h2>${data.name}</h2>
+          <h2>${data.name}, ${data.sys.country}</h2>
           <p>${data.weather[0].main} - ${data.weather[0].description}</p>
           <p>Temp: ${data.main.temp}°C</p>
           <p>Feels Like: ${data.main.feels_like}°C</p>
