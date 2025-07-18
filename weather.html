@@ -87,49 +87,7 @@
     <div class="weather" id="weatherResult"></div>
   </div>
 
-  <script>
-    async function getWeather() {
-      const city = document.getElementById('cityInput').value;
-      const apiKey = '503a7f59850d436323b5d49c4def4dbd';
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-      function convertUnixToTime(timestamp) {
-        const date = new Date(timestamp * 1000);
-        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      }
-
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('City not found');
-        const data = await response.json();
-        const windSpeedKmh = (data.wind.speed * 3.6 / 1.609).toFixed(1);
-        const country = data.sys.country;
-        const iconCode = data.weather[0].icon;
-        const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
-        console.log("stephanie this is the weather", data)
-
-
-        document.getElementById('weatherResult').innerHTML = `
-          <h2>${data.name}, ${data.sys.country}
-            <img src="https://flagsapi.com/${country}/flat/32.png" alt="${country} flag" />
-         </h2>
-          <p><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="Weather icon" /></p>
-          <p>${data.weather[0].main} - ${data.weather[0].description}</p>
-          <p>Temp: ${data.main.temp}°C</p>
-          <p>Feels Like: ${data.main.feels_like}°C</p>
-          <p>Humidity: ${data.main.humidity}%</p>
-          <p>Wind Speed: ${windSpeedKmh} miles per hour</p>
-          <p>Sunrise: ${convertUnixToTime(data.sys.sunrise)} AM</p>
-          <p>Sunset: ${convertUnixToTime(data.sys.sunset)} PM</p>
-        `;
-
-        // if (data.weather[0].main === 'Clouds') {
-        //   document.body.style.background = 'linear-gradient(to right, #4e54c8, #8f94fb)';
-        // }
-      } catch (error) {
-        document.getElementById('weatherResult').innerHTML = `<p>⚠️ ${error.message}</p>`;
-      }
-    }
-  </script>
+  <script src="script.js" defer></script>
 </body>
 
 </html>
