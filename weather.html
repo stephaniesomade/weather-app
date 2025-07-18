@@ -78,6 +78,8 @@
         const data = await response.json();
         const windSpeedKmh = (data.wind.speed * 3.6 / 1.609).toFixed(1);
         const country = data.sys.country;
+        const iconCode = data.weather[0].icon;
+        const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
         console.log("stephanie this is the weather", data)
 
 
@@ -85,6 +87,7 @@
           <h2>${data.name}, ${data.sys.country}
             <img src="https://flagsapi.com/${country}/flat/32.png" alt="${country} flag" />
          </h2>
+          <p><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="Weather icon" /></p>
           <p>${data.weather[0].main} - ${data.weather[0].description}</p>
           <p>Temp: ${data.main.temp}°C</p>
           <p>Feels Like: ${data.main.feels_like}°C</p>
