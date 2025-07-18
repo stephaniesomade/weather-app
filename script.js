@@ -16,14 +16,25 @@ function setBackground(weather) {
   body.style.background = gradient;
 }
 
+function convertUnixToTime(timestamp) {
+  const date = new Date(timestamp * 1000);
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+
+function formatTimeWithAmPm(timestamp) {
+
+  const getTime = convertUnixToTime(timestamp)
+  const getHour = `${getTime[0]}${getTime[1]}`
+
+  const getTimeStamp = getHour >= 12 ? 'PM' : 'AM';
+  return `${getTime} ${getTimeStamp}`
+}
+
 async function getWeather() {
   const city = document.getElementById('cityInput').value;
   const apiKey = '503a7f59850d436323b5d49c4def4dbd';
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  function convertUnixToTime(timestamp) {
-    const date = new Date(timestamp * 1000);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  }
 
   try {
     const response = await fetch(url);
@@ -31,7 +42,6 @@ async function getWeather() {
     const data = await response.json();
     const windSpeedKmh = (data.wind.speed * 3.6 / 1.609).toFixed(1);
     const country = data.sys.country;
-    const iconCode = data.weather[0].icon;
     setBackground(data.weather[0].main);
 
     console.log("stephanie this is the weather", data)
@@ -47,8 +57,8 @@ async function getWeather() {
       <p>Feels Like: ${data.main.feels_like}°C</p>
       <p>Humidity: ${data.main.humidity}%</p>
       <p>Wind Speed: ${windSpeedKmh} miles per hour</p>
-      <p>Sunrise: ${convertUnixToTime(data.sys.sunrise)} AM</p>
-      <p>Sunset: ${convertUnixToTime(data.sys.sunset)} PM</p>
+      <p>Sunrise: ${formatTimeWithAmPm(data.sys.sunrise)}</p>
+      <p>Sunset: ${formatTimeWithAmPm(data.sys.sunset)}</p>
     `;
 
   } catch (error) {
