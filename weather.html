@@ -36,16 +36,24 @@
 
     button {
       margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      border: none;
-      background-color: #6C63FF;
-      color: white;
-      border-radius: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255, 192, 203, 0.15);
+      /* soft pink tint */
+      border: 2px solid rgba(255, 182, 193, 0.6);
+      /* light pink border */
+      color: black;
+      border-radius: 0.75rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      font-weight: 600;
       cursor: pointer;
+      transition: background 0.3s ease, border 0.3s ease;
     }
 
     button:hover {
-      background-color: #5a52d4;
+      background: rgba(255, 192, 203, 0.25);
+      /* a bit more visible on hover */
+      border: 2px solid rgba(255, 182, 193, 0.85);
     }
 
     .weather {
