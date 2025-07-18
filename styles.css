@@ -1,0 +1,70 @@
+.search-row {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.search-row input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.75rem;
+  width: 60%;
+  min-width: 160px;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background: linear-gradient(to right, #8EC5FC, #E0C3FC);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  width: 80%;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: rgba(255, 192, 203, 0.15);
+  /* soft pink tint */
+  border: 2px solid rgba(255, 182, 193, 0.6);
+  /* light pink border */
+  color: black;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255, 192, 203, 0.25);
+  /* a bit more visible on hover */
+  border: 2px solid rgba(255, 182, 193, 0.85);
+}
+
+.weather {
+  margin-top: 1rem;
+}
