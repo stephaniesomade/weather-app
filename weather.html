@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,6 +17,7 @@
       height: 100vh;
       margin: 0;
     }
+
     .card {
       background: white;
       padding: 2rem;
@@ -24,12 +26,14 @@
       text-align: center;
       width: 300px;
     }
+
     input {
       padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 0.5rem;
       width: 80%;
     }
+
     button {
       margin-top: 1rem;
       padding: 0.5rem 1rem;
@@ -39,14 +43,17 @@
       border-radius: 0.5rem;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #5a52d4;
     }
+
     .weather {
       margin-top: 1rem;
     }
   </style>
 </head>
+
 <body>
   <div class="card">
     <h1>Find out the Weather Today</h1>
@@ -60,6 +67,10 @@
       const city = document.getElementById('cityInput').value;
       const apiKey = '503a7f59850d436323b5d49c4def4dbd';
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+      function convertUnixToTime(timestamp) {
+        const date = new Date(timestamp * 1000);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
 
       try {
         const response = await fetch(url);
@@ -67,17 +78,27 @@
         const data = await response.json();
         console.log("stephanie this is the weather", data)
 
+        const windSpeedKmh = (data.wind.speed * 3.6 / 1.609).toFixed(1);
+
         document.getElementById('weatherResult').innerHTML = `
           <h2>${data.name}, ${data.sys.country}</h2>
           <p>${data.weather[0].main} - ${data.weather[0].description}</p>
           <p>Temp: ${data.main.temp}°C</p>
           <p>Feels Like: ${data.main.feels_like}°C</p>
           <p>Humidity: ${data.main.humidity}%</p>
+          <p>Wind Speed: ${windSpeedKmh} miles per hour</p>
+          <p>Sunrise: ${convertUnixToTime(data.sys.sunrise)} AM</p>
+          <p>Sunset: ${convertUnixToTime(data.sys.sunset)} PM</p>
         `;
+
+        // if (data.weather[0].main === 'Clouds') {
+        //   document.body.style.background = 'linear-gradient(to right, #4e54c8, #8f94fb)';
+        // }
       } catch (error) {
         document.getElementById('weatherResult').innerHTML = `<p>⚠️ ${error.message}</p>`;
       }
     }
   </script>
 </body>
+
 </html>
